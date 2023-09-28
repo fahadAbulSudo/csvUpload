@@ -1,0 +1,43 @@
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px; /* Add vertical spacing */
+}
+
+/* Style for the input element */
+.search-input {
+    width: 400px; /* Adjust the width as needed */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px; /* Rounded corners */
+    outline: none; /* Remove the default input focus border */
+}
+
+/* Style for the placeholder text */
+.search-input::placeholder {
+    color: #888; /* Placeholder text color */
+}
+
+::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #EADDCA; /* Color of the thumb (the draggable part) */
+    border-radius: 5px; /* Rounded corners for the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #EADDCA; /* Color when hovering over the thumb */
+}
+
+.home-icon {
+    color: silver; 
+}
+
+.home-text {
+    color: silver;
+}
+
+  

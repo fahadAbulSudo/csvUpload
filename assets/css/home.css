@@ -1,0 +1,38 @@
+/* Style the custom upload form */
+.custom-upload-form {
+    border: 1px solid #000; /* Add a border */
+    border-radius: 10px; /* Add rounded corners */
+    background-color: #F5F5DC; /* Set background color */
+    padding: 20px; /* Add some padding for spacing */
+    margin: 0 auto; /* Center align the form horizontally */
+    max-width: 500px; /* Limit the form width */
+  }
+  
+  /* Style the selected file name */
+#selectedFileName {
+    display: block;
+    margin-top: 10px; /* Add space below the file input */
+    font-weight: bold; /* Make the file name text bold */
+  }
+  
+
+::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #EADDCA; /* Color of the thumb (the draggable part) */
+    border-radius: 5px; /* Rounded corners for the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #EADDCA; /* Color when hovering over the thumb */
+}
+
+.home-icon {
+    color: silver; 
+}
+
+.home-text {
+    color: silver; 
+}
