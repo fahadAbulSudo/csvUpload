@@ -25,8 +25,7 @@ npm start
 Open your web browser and access the application at http://localhost:8000.
 
 Project Structure
-arduino
-Copy code
+```bash
 csv-file-upload-list/
 │   index.js
 │   package-lock.json
@@ -64,7 +63,8 @@ csv-file-upload-list/
         layout.ejs
         _footer.ejs
         _header.ejs
-Usage
+
+4. Usage
 Use the web interface to upload CSV files.
 The uploaded CSV files are listed on the homepage.
 Click on a CSV file name to view its contents.
