@@ -25,44 +25,44 @@ npm start
 Open your web browser and access the application at http://localhost:8000.
 
 Project Structure
-```bash
-csv-file-upload-list/
-│   index.js
-│   package-lock.json
-│   package.json
-│
-├───assets/
-│   ├───css/
-│   │       csv.css
-│   │       home.css
-│   │
-│   └───js/
-│           csv.js
-│           home.js
-│
-├───config/
-│       middleware.js
-│       mongoose.js
-│
-├───controllers/
-│       csvController.js
-│       homeController.js
-│
-├───models/
-│       csv.js
-│
-├───routes/
-│       index.js
-│
-├───uploads/
-│   └───files/
-│
-└───views/
-        csv.ejs
-        home.ejs
-        layout.ejs
-        _footer.ejs
-        _header.ejs
+   ```bash
+   csv-file-upload-list/
+   │   index.js
+   │   package-lock.json
+   │   package.json
+   │
+   ├───assets/
+   │   ├───css/
+   │   │       csv.css
+   │   │       home.css
+   │   │
+   │   └───js/
+   │           csv.js
+   │           home.js
+   │
+   ├───config/
+   │       middleware.js
+   │       mongoose.js
+   │
+   ├───controllers/
+   │       csvController.js
+   │       homeController.js
+   │
+   ├───models/
+   │       csv.js
+   │
+   ├───routes/
+   │       index.js
+   │
+   ├───uploads/
+   │   └───files/
+   │
+   └───views/
+           csv.ejs
+           home.ejs
+           layout.ejs
+           _footer.ejs
+           _header.ejs
 
 4. Usage
 Use the web interface to upload CSV files.
