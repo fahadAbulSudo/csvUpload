@@ -23,6 +23,7 @@ npm install
 3. Start the server:
 
 npm start
+
 Open your web browser and access the application at http://localhost:8000.
 
 Project Structure
