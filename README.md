@@ -66,16 +66,17 @@ Project Structure
 ```
 
 4. Usage
-Use the web interface to upload CSV files.
-The uploaded CSV files are listed on the homepage.
-Click on a CSV file name to view its contents.
-Search within the CSV file data.
-Click the "Delete" button to remove a CSV file.
-Technologies Used
-Node.js
-Express.js
-MongoDB
-Mongoose
-EJS (Embedded JavaScript)
-Multer
-Noty (for notifications)
+- Use the web interface to upload CSV files.
+- The uploaded CSV files are listed on the homepage.
+- Click on a CSV file name to view its contents.
+- Search within the CSV file data.
+- Click the "Delete" button to remove a CSV file.
+
+5. Technologies Used
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- EJS (Embedded JavaScript)
+- Multer
+- Noty (for notifications)
