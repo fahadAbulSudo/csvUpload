@@ -1,0 +1,28 @@
+<!-- Add a div element to hold the pie chart -->
+<div id="pieChart" class="chart"></div>
+
+<script type="text/javascript">
+    // Function to create and display the pie chart
+    function createPieChart(data) {
+        google.charts.load('current', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(function () {
+            const chartData = new google.visualization.DataTable();
+            chartData.addColumn('string', 'Category');
+            chartData.addColumn('number', 'Percentage');
+
+            // Add data from the server response
+            for (let i = 0; i < data.labels.length; i++) {
+                chartData.addRow([data.labels[i], data.percentages[i]]);
+            }
+
+            const options = {
+                title: 'Pie Chart',
+                width: 400,
+                height: 300,
+            };
+
+            const chart = new google.visualization.PieChart(document.getElementById('pieChart'));
+            chart.draw(chartData, options);
+        });
+    }
+</script>

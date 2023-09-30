@@ -1,5 +1,18 @@
 <!-- Include the custom CSS file for CSV page -->
 <link rel="stylesheet" href="/css/csv.css">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<!-- Input field for column name selection -->
+<div class="container mt-4">
+    <div class="column-select">
+        <input type="text" id="columnInput" class="column-input" placeholder="Enter Column Name">
+        <button id="visualizeButton" class="visualize-button" csvId="<%= csvId %>" >Visualize</button>
+    </div>
+    <p id="errorMessage" class="error-message"></p>
+</div>
+
+<!-- Field for displaying Google chart -->
+<div id="chart_div"></div>
 
 <!-- Container for displaying CSV data -->
 <div class="container mt-4 mb-5 pb-5">

@@ -15,4 +15,7 @@ router.get('/', HomeController.listUploadedFiles);
 // View a specific CSV file by ID
 router.get('/view/:csvId', CsvController.readCsvFile);
 
+// Visualize a specific CSV data column by CSV ID and column name
+router.get('/visualize/:csvId/:columnName', CsvController.visualizeColumn);
+
 module.exports = router;
