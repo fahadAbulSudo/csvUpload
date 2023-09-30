@@ -63,6 +63,7 @@ Project Structure
            layout.ejs
            _footer.ejs
            _header.ejs
+```
 
 4. Usage
 Use the web interface to upload CSV files.
