@@ -1,0 +1,69 @@
+<!-- Include the custom CSS file for dashboard page -->
+<link rel="stylesheet" href="/css/dashboard.css">
+
+<!-- Script to pass the user's group ID to the client-side -->
+<script>
+    const userIde = '<%= user.id %>';
+    const userGroupId = '<%= user.groupId %>';
+</script>
+<script src="/socket.io/socket.io.js"></script>
+
+<!-- Container for uploading CSV file -->
+<div class="container mt-4 text-center">
+    <h3>Upload CSV File</h3>
+    <form class="custom-upload-form">
+        <div class="form-group">
+            <!-- Hidden input for selecting CSV file -->
+            <input type="file" class="form-control-file" id="csvFile" name="csvFile" accept=".csv" style="display: none;">
+            <!-- Button to choose the file -->
+            <label for="csvFile" class="btn btn-primary">Choose File</label>
+            <!-- Display selected file name -->
+            <span id="selectedFileName"></span>
+        </div>
+        <!-- Submit button to upload the file -->
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+</div>
+
+<!-- Container for listing uploaded CSV files -->
+<div class="container mt-4 mb-5 pb-4">
+    <h3>List of Uploaded CSV Files</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>File Name</th>
+                <th>Created Date</th>
+                <th>Created Time</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="csvList">
+            <% csvFiles.forEach((csv) => { %>
+                <tr class="csv-entry">
+                    <td><%= csv.fileName %></td>
+                    <td><%= new Date(csv.createdAt).toLocaleDateString() %></td>
+                    <td><%= new Date(csv.createdAt).toLocaleTimeString() %></td>
+                    <td>
+                        <!-- Button to view the CSV file -->
+                        <a href="/view/<%= csv._id %>" class="btn btn-success btn-sm" title="View CSV">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <!-- Button to fetch columns -->
+                        <a href="/column/<%= csv._id %>" class="btn btn-info btn-sm" title="Fetch Columns">
+                            <i class="fas fa-list-ul"></i>
+                        </a>
+                        <% if (user.role === 'Admin') { %>
+                            <button class="btn btn-danger btn-sm delete-csv" data-csvid="<%= csv._id %>" data-groupid="<%= user.groupId %>" title="Delete CSV">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        <% } %>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
+
+<!-- Include the custom JavaScript file for dashboard page -->
+<script src="/js/dashboard.js"></script>
+

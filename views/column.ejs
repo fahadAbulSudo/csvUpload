@@ -1,0 +1,29 @@
+<h1>Columns of CSV File</h1>
+
+<ul>
+    <% csvHeaders.forEach((header) => { %>
+        <li><%= header %></li>
+    <% }); %>
+</ul>
+
+<!-- Hidden input fields to store the CSV headers and CSV ID -->
+<input type="hidden" id="csvHeaders" value='<%= JSON.stringify(csvHeaders) %>'>
+<input type="hidden" id="csvId" value="<%= csvId %>">
+
+<h2>Check if a column exists</h2>
+
+<!-- Form to input column name -->
+<form id="columnCheckForm">
+    <label for="columnName">Enter column name:</label>
+    <input type="text" id="columnName" name="columnName" required>
+    <button type="submit">Check</button>
+</form>
+
+<!-- Placeholder for validation message -->
+<p id="validationMessage"></p>
+
+<!-- Placeholder for column statistics -->
+<div id="statisticsContainer"></div>
+
+<!-- Include the custom JavaScript file for column page -->
+<script src="/js/column.js"></script>

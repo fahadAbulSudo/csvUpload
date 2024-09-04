@@ -1,0 +1,86 @@
+<!-- Include the custom CSS file for dashboard page -->
+<link rel="stylesheet" href="/css/dashboard.css">
+<script>
+    const userGroupId = '<%= user.groupId %>';
+</script>
+  
+<!-- Container for uploading CSV file -->
+<div class="container mt-4 text-center">
+    <h3>Upload CSV File</h3>
+    <form action="/dashboard/<%= user.groupId %>/upload" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()" class="custom-upload-form">
+        <div class="form-group">
+            <!-- Hidden input for selecting CSV file -->
+            <input type="file" class="form-control-file" id="csvFile" name="csvFile" accept=".csv" style="display: none;">
+            <!-- Button to choose the file -->
+            <label for="csvFile" class="btn btn-primary">Choose File</label>
+            <!-- Display selected file name -->
+            <span id="selectedFileName"></span>
+        </div>
+        <!-- Submit button to upload the file -->
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+</div>
+
+<!-- Container for listing uploaded CSV files -->
+<div class="container mt-4 mb-5 pb-4">
+    <h3>List of Uploaded CSV Files</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>File Name</th>
+                <th>Created Date</th>
+                <th>Created Time</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="csvList">
+            <% csvFiles.forEach((csv) => { %>
+                <tr>
+                    <!-- Display CSV file details -->
+                    <tr class="csv-entry">
+                        <td><%= csv.fileName %></td>
+                        <td><%= new Date(csv.createdAt).toLocaleDateString() %></td>
+                        <td><%= new Date(csv.createdAt).toLocaleTimeString() %></td>
+                        <td>
+                          <!-- Button to view the CSV file -->
+                          <a href="/view/<%= csv._id %>" class="btn btn-success btn-sm" title="View CSV"><i class="fas fa-edit"></i></a>
+                          <% if (user.role === 'Admin') { %>
+                            <button class="btn btn-danger btn-sm delete-csv" data-csvid="<%= csv._id %>" data-groupid="<%= user.groupId %>" title="Delete CSV">
+                              <i class="fas fa-trash-alt"></i>
+                            </button>
+                          <% } %>
+                        </td>
+                    </tr>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
+
+<!-- JavaScript code to handle file input and form validation -->
+<script>
+    const fileInput = document.getElementById('csvFile');
+    const selectedFileName = document.getElementById('selectedFileName');
+
+    fileInput.addEventListener('change', function () {
+        // Display selected file name
+        if (fileInput.files.length > 0) {
+            selectedFileName.textContent = `Selected file: ${fileInput.files[0].name}`;
+        } else {
+            selectedFileName.textContent = '';
+        }
+    });
+
+    function validateForm() {
+        // Validate that a file is selected before submitting the form
+        const fileInput = document.getElementById('csvFile');
+        if (!fileInput.value) {
+            alert('Please choose a CSV file.');
+            return false;
+        }
+        return true;
+    }
+</script>
+
+<!-- Include the custom JavaScript file for dashboard page -->
+<script src="/js/dashboard.js"></script>

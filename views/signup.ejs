@@ -1,0 +1,75 @@
+<!-- <link rel="stylesheet" href="/css/auth.css"> -->
+
+<div class="container mt-4">
+    <h2 class="text-center">Sign Up</h2>
+
+    <!-- Display flash messages if any -->
+    <% if (flash && flash.error) { %>
+        <div class="alert alert-danger"><%= flash.error %></div>
+    <% } %>
+
+    <!-- Signup form -->
+    <form id="signupForm" method="POST" class="mt-4">
+        <div class="form-group">
+            <label for="role">Sign Up as:</label>
+            <select name="role" id="role" class="form-control" required>
+                <option value="Admin">Admin</option>
+                <option value="Developer">Developer</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" name="username" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+
+        <!-- Conditional fields based on role -->
+        <div id="adminFields">
+            <div class="form-group">
+                <label for="groupName">Group Name:</label>
+                <input type="text" name="groupName" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="groupDescription">Group Description:</label>
+                <input type="text" name="groupDescription" class="form-control">
+            </div>
+        </div>
+
+        <div id="developerFields" style="display:none;">
+            <div class="form-group">
+                <label for="token">Token:</label>
+                <input type="text" name="token" class="form-control">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('role').addEventListener('change', function() {
+        const role = this.value;
+        document.getElementById('adminFields').style.display = (role === 'Admin') ? 'block' : 'none';
+        document.getElementById('developerFields').style.display = (role === 'Developer') ? 'block' : 'none';
+    });
+
+    // Intercept form submission to dynamically set action based on role
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
+        const role = document.getElementById('role').value;
+
+        // Dynamically set the form action based on the selected role
+        if (role === 'Admin') {
+            this.action = '/signup';
+        } else if (role === 'Developer') {
+            this.action = '/register';
+        }
+
+        // The form will now be submitted to the correct route
+    });
+</script>

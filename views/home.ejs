@@ -1,78 +1,31 @@
-<!-- Include the custom CSS file for home page -->
-<link rel="stylesheet" href="/css/home.css">
-
-<!-- Container for uploading CSV file -->
 <div class="container mt-4 text-center">
-    <h3>Upload CSV File</h3>
-    <form action="/upload" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()" class="custom-upload-form">
-        <div class="form-group">
-            <!-- Hidden input for selecting CSV file -->
-            <input type="file" class="form-control-file" id="csvFile" name="csvFile" accept=".csv" style="display: none;">
-            <!-- Button to choose the file -->
-            <label for="csvFile" class="btn btn-primary">Choose File</label>
-            <!-- Display selected file name -->
-            <span id="selectedFileName"></span>
-        </div>
-        <!-- Submit button to upload the file -->
-        <button type="submit" class="btn btn-primary">Upload</button>
-    </form>
-</div>
+    <h1>Welcome to CSV Manager</h1>
 
-<!-- Container for listing uploaded CSV files -->
-<div class="container mt-4 mb-5 pb-4">
-    <h3>List of Uploaded CSV Files</h3>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>File Name</th>
-                <th>Created Date</th>
-                <th>Created Time</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="csvList">
-            <% csvFiles.forEach((csv) => { %>
-                <tr>
-                    <!-- Display CSV file details -->
-                    <td><%= csv.fileName %></td>
-                    <td><%= new Date(csv.createdAt).toLocaleDateString() %></td>
-                    <td><%= new Date(csv.createdAt).toLocaleTimeString() %></td>
-                    <td>
-                        <!-- Button to view the CSV file -->
-                        <a href="/view/<%= csv._id %>" class="btn btn-success btn-sm" title="View CSV"><i class="fas fa-edit"></i></a>
-                        <!-- Button to delete the CSV file -->
-                        <button class="btn btn-danger btn-sm delete-csv" data-csvid="<%= csv._id %>" title="Delete CSV"><i class="fas fa-trash-alt"></i></button>
-                    </td>
-                </tr>
-            <% }); %>
-        </tbody>
-    </table>
-</div>
+    <!-- Display different buttons based on session status -->
+    <% if (user) { %>
+        <h3>Hello, <%= user.username %></h3>
+        
+        <!-- Dashboard button -->
+        <a href="/dashboard/<%= user.groupId %>" class="btn btn-primary mt-3">Go to Dashboard</a>
+        
+        <!-- Generate Token button for Admins only -->
+        <% if (user.role === 'Admin') { %>
+            <form action="/generate-token" method="post" class="d-inline-block">
+                <button id="generate-token-btn" data-groupid="<%= user.groupId %>" class="btn btn-warning mt-3">Generate Token</button>
+            </form>
+        <% } %>
 
-<!-- JavaScript code to handle file input and form validation -->
-<script>
-    const fileInput = document.getElementById('csvFile');
-    const selectedFileName = document.getElementById('selectedFileName');
-
-    fileInput.addEventListener('change', function () {
-        // Display selected file name
-        if (fileInput.files.length > 0) {
-            selectedFileName.textContent = `Selected file: ${fileInput.files[0].name}`;
-        } else {
-            selectedFileName.textContent = '';
-        }
-    });
-
-    function validateForm() {
-        // Validate that a file is selected before submitting the form
-        const fileInput = document.getElementById('csvFile');
-        if (!fileInput.value) {
-            alert('Please choose a CSV file.');
-            return false;
-        }
-        return true;
-    }
-</script>
-
+        <!-- Logout button -->
+        <form action="/logout" method="get" class="d-inline-block">
+            <button type="submit" class="btn btn-danger mt-3">Logout</button>
+        </form>
+        <!-- Display the generated token here -->
+        <div id="generated-token" class="mt-3"></div>
+    <% } else { %>
+        <!-- Login and Signup buttons -->
+        <a href="/login" class="btn btn-primary mt-3">Login</a>
+        <a href="/signup" class="btn btn-secondary mt-3">Sign Up</a>
+    <% } %>
+</div> 
 <!-- Include the custom JavaScript file for home page -->
 <script src="/js/home.js"></script>

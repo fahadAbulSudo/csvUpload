@@ -1,33 +1,44 @@
-// Wait for the document to be fully loaded before executing JavaScript code
-$(document).ready(async function () {
-  // Add a click event listener to elements with the 'delete-csv' class
-  $('.delete-csv').on('click', async function (e) {
-    e.preventDefault();
-    
-    // Get the 'data-csvid' attribute value from the clicked element
-    const csvId = $(this).data('csvid');
-    console.log(csvId);
+$(document).ready(function () {
+    $('#generate-token-btn').on('click', async function (e) {
+        e.preventDefault();
 
-    // Display a confirmation dialog for deleting the CSV file
-    if (confirm('Are you sure you want to delete this CSV file?')) {
-      // Send an AJAX DELETE request to the server to delete the CSV file
-      await $.ajax({
-        url: `/delete/${csvId}`,
-        type: 'DELETE',
-        success: function(response){
-          // Redirect to the homepage after successful deletion
-          window.location.href = '/';
-          
-          // Show a success notification using the Noty library
-          new Noty({
-            theme: 'relax',
-            text: "Comment Deleted",
-            type: 'success',
-            layout: 'topRight',
-            timeout: 1500
-          }).show();
+        // Get the groupId from the button's data attribute
+        const groupId = $(this).data('groupid');
+        // Send an AJAX POST request to generate the token
+        try {
+            const response = await $.ajax({
+                url: '/generate-token',
+                type: 'POST',
+                data: { groupId: groupId },
+                success: function (data) {
+                    // Show the generated token in the designated area
+                    $('#generated-token').html(`
+                        <p>Token generated successfully!</p>
+                        <p><strong>Token:</strong> ${data.token}</p>
+                    `);
+
+                    // Show a success notification using the Noty library
+                    new Noty({
+                        theme: 'relax',
+                        text: "Token generated successfully!",
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1500
+                    }).show();
+                },
+                error: function (xhr, status, error) {
+                    // Show an error notification
+                    new Noty({
+                        theme: 'relax',
+                        text: "Failed to generate token. Please try again.",
+                        type: 'error',
+                        layout: 'topRight',
+                        timeout: 1500
+                    }).show();
+                }
+            });
+        } catch (err) {
+            console.error('Error generating token:', err);
         }
-      });
-    }
-  });
+    });
 });

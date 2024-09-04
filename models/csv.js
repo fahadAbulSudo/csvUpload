@@ -4,19 +4,25 @@ const mongoose = require('mongoose');
 const csvSchema = new mongoose.Schema({
   fileName: {
     type: String,
+    required: true,
   },
   filePath: {
     type: String,
+    required: true,
   },
-  file: {
-    type: String,
+  uploadedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  group: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Group',
+    required: true,
   },
 }, {
-  timestamps: {
-    options: { timeZone: 'Asia/Kolkata' } // Set the time zone for timestamps
-  }
+  timestamps: true,
 });
-
 // Create a model named 'Csv' based on the schema
 const Csv = mongoose.model("Csv", csvSchema);
 
